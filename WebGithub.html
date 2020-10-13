@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebGithub</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+      $("#button1").click(function(){
+       $.get("https://api.github.com/users/"+$("#usr").val()+"/repos", function(data, status){
+          $("#tabla1 tbody").empty();
+          for (var i=0; i<data.length; i++) {
+
+              var htmlTags = '<tr>'+
+                    '<td>' + data[i].name + '</td>'+
+                    '<td>' + data[i].description + '</td>'+
+                    '<td>' + data[i].stargazers_count + '</td>'+
+                  '</tr>';
+
+              $('#tabla1 tbody').append(htmlTags);
+          }
+        });
+      });
+    });
+    </script>
+
+    <script>
+        $(document).ready(function(){
+          $("#button2").click(function(){
+            alert("Value: " + $("#test").val());
+          });
+        });
+</script>
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Small website with Bootstrap and JQuery</h1>
+        <p>Implement a simple website with Bootstrap and JQuery</p>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Formulario de entrada de datos</h2>
+    <p>Escribe tu usuario de Github para ver tus datos:</p>
+    <form>
+        <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" id="usr">
+        </div>
+        <button type="button" class="btn btn-primary" id="button1">Buscar</button>
+    </form>
+</div>
+
+<div class="container">
+    <h2>info. Repositories</h2>
+    <table class="table table-striped table-bordered" id="tabla1">
+        <thead class ="thead-dark" >
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Followers</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
